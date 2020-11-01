@@ -11,14 +11,13 @@ def allIsbn():
     return make_response(result, result_status)
 
 
-@isbn.route("/query/isbn_id/<id>", methods=["POST"])
-def getBookInfo(id):
-    print(id)
+@isbn.route("/query" )
+def getBookInfo():
+    id=request.args['id']
     code = 200
     if id != None:
         book = getBook(id)
-        print(book)
     else:
         abort(400)
 
-    return make_response("done", code)
+    return make_response(book[0], book[1])
